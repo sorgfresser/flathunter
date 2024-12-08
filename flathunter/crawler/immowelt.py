@@ -86,7 +86,9 @@ class Immowelt(Crawler):
 
             id_element = adv.find("a")
             try:
-                url = "https://immowelt.de" + id_element.get("href")
+                url = id_element.get("href")
+                if "https" not in url:
+                    url = "https://immowelt.de/" + url
             except IndexError:
                 continue
 

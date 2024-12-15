@@ -14,7 +14,6 @@ from flathunter.crawler.idealista import Idealista
 from flathunter.crawler.immobiliare import Immobiliare
 from flathunter.crawler.immobilienscout import Immobilienscout
 from flathunter.crawler.immowelt import Immowelt
-from flathunter.crawler.meinestadt import MeineStadt
 from flathunter.crawler.wggesucht import WgGesucht
 from flathunter.crawler.vrmimmo import VrmImmo
 from flathunter.crawler.subito import Subito
@@ -130,7 +129,6 @@ Preis: {price}
             Subito(self),
             Immobiliare(self),
             Idealista(self),
-            MeineStadt(self),
             VrmImmo(self)
         ]
 

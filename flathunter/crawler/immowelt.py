@@ -57,21 +57,22 @@ class Immowelt(Crawler):
         for adv in advertisements:
             try:
                 title = adv.find("div", {"class": "css-1cbj9xw"}).text
-            except:
+            except AttributeError:
                 title = ""
 
             try:
                 price = adv.find(
                     "div", attrs={"data-testid": "cardmfe-price-testid"}).text
-            except:
+            except AttributeError:
                 price = ""
 
             try:
-                descriptions = adv.find("div", attrs={"data-testid": "cardmfe-keyfacts-testid"}).children
+                descriptions = adv.find("div",
+                    attrs={"data-testid": "cardmfe-keyfacts-testid"}).children
                 descriptions = [result.text for result in descriptions]
-            except:
+            except AttributeError:
                 descriptions = []
-            
+
             size = list(filter(lambda x: "m²" in x, descriptions))
             try:
                 size = size[0]

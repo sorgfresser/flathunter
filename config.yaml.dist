@@ -123,14 +123,16 @@ title: "{crawler}: {title}"
 
 # If you are planning to scrape immoscout24.de, the bot will need
 # to circumvent the sites captcha protection by using a captcha
-# solving service. Register at either imagetypers or 2captcha
-# (the former is prefered), desposit some funds, uncomment the
-# corresponding lines below and replace your API key/token.
-# Use driver_arguments to provide options for Chrome WebDriver.
+# solving service. Register at either imagetypers, 2captcha or
+# capmonster (as at December 2024, Capmonster is prefered), desposit
+# some funds, uncomment the corresponding lines below and replace your
+# API key/token. Use driver_arguments to provide options for Chrome WebDriver.
 # captcha:
 #       imagetyperz:
 #             token: alskdjaskldjfklj
 #       2captcha:
+#             api_key: alskdjaskldjfklj
+#       capmonster:
 #             api_key: alskdjaskldjfklj
 #       driver_arguments:
 #         - "--headless"

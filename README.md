@@ -32,7 +32,7 @@ Currently available messaging services are [Telegram](https://telegram.org/), [M
   - [Configuration](#configuration)
     - [URLs](#urls)
     - [Telegram](#telegram)
-    - [2Captcha](#2captcha)
+    - [Capmonster](#capmonster)
     - [Proxy](#proxy)
     - [Google API](#google-api)
   - [Command-line Interface](#command-line-interface)
@@ -170,7 +170,12 @@ Some sites (including Kleinanzeigen and ImmoScout24) implement bot detection to 
 
 #### Captchas
 
-Some sites (including ImmoScout24) implement a Captcha to avoid being crawled by evil web scrapers. Since our crawler is not an evil one, the people at [2Captcha](https://2captcha.com) and [Imagetyperz](https://imagetyperz.com/) provide services that help you solve them. You can head over to one of those services and buy some credit for captcha solving. You will need to install the API key for your captcha-solving account in the `config.yaml`. Check out `config.yaml.dist` to see how to configure `2Captcha` or `Imagetyperz` with Flathunter. **At this time, ImmoScout24 can not be crawled by Flathunter without using 2Captcha/Imagetyperz. Buying captcha solutions does not guarantee that you will get past the ImmoScout24 bot detection (see [#296](https://github.com/flathunters/flathunter/issues/296), [#302](https://github.com/flathunters/flathunter/issues/302))**.
+Some sites (including ImmoScout24) implement a Captcha to avoid being crawled by evil web scrapers. Since our crawler is not an evil one, the people at [2Captcha](https://2captcha.com), [Imagetyperz](https://imagetyperz.com/) and [Capmonster](https://capmonster.cloud/) provide services that help you solve them. You can head over to one of those services and buy some credit for captcha solving. You will need to install the API key for your captcha-solving account in the `config.yaml`. Check out `config.yaml.dist` to see how to configure `2Captcha`, `Imagetyperz` or `Capmonster` with Flathunter. **At this time, ImmoScout24 can not be crawled by Flathunter without using Capmonster. Buying captcha solutions does not guarantee that you will get past the ImmoScout24 bot detection (see [#296](https://github.com/flathunters/flathunter/issues/296), [#302](https://github.com/flathunters/flathunter/issues/302))**.
+
+#### Capmonster
+
+Currently, [Capmonster](https://capmonster.cloud/) is the only implemented captcha-solving service that solves the captchas on ImmoScout24. You will need to set
+the `FLATHUNTER_CAPMONSTER_KEY` environment variable or add the key to your `config.yaml` to solve the captchas.
 
 #### ImmoScout24 Cookie Override
 

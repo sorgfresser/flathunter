@@ -244,13 +244,13 @@ You can either use just Docker or Docker Compose to run the app containerized. W
 2. To build the image, run inside the project's root directory:
 
 ```sh
-docker-compose build
+docker compose build
 ```
 
 3. To run the docker container, run inside the project's root directory:
 
 ```sh
-docker-compose up
+docker compose up
 ```
 
 #### With plain Docker

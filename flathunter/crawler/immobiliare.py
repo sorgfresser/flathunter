@@ -55,7 +55,7 @@ class Immobiliare(Crawler):
 
             detail_texts = [ item.find("span").text.strip() for item in details_list ]
             room_counts = [ match.group(1) for text in detail_texts
-                if (match := re.match(r"(\d+) local[ie]", text)) is not None ]
+                if (match := re.match(r"(\d+)\+? local[ie]", text)) is not None ]
             if len(room_counts) > 0:
                 rooms = room_counts[0]
             else:

@@ -77,7 +77,7 @@ class CapmonsterSolver(CaptchaSolver):
 
             response_json = retrieve_response.json()
             if not "status" in response_json:
-                raise requests.HTTPError(response=response_json["errrorCode"])
+                raise requests.HTTPError(response=response_json["errorCode"])
 
             if response_json["status"] == "processing":
                 logger.info("Captcha is not ready yet, waiting...")

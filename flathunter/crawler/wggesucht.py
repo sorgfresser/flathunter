@@ -95,7 +95,7 @@ def is_verified_company(row: Tag) -> bool:
 # pylint: disable=too-many-return-statements
 def parse_expose_element_to_details(row: Tag, crawler: str) -> Optional[Dict]:
     """Parse an Expose soup element to an Expose details dictionary"""
-    title_row = row.find('h3', {"class": "truncate_title"})
+    title_row = row.find('h2', {"class": "truncate_title"})
     if title_row is None or not isinstance(title_row, Tag):
         logger.warning("No title found - skipping")
         return None

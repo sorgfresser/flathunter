@@ -102,7 +102,7 @@ class Immowelt(Crawler):
                 address = adv.find(
                     "div", attrs={"data-testid": "cardmfe-description-box-address"}
                   ).text
-            except (IndexError, AttributeError):
+            except AttributeError:
                 address = ""
             ad_id = url.split('/')[-1]
             processed_id = int(

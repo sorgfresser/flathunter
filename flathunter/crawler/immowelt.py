@@ -90,7 +90,7 @@ class Immowelt(Crawler):
                 url = id_element.get("href")
                 if "https" not in url:
                     url = "https://immowelt.de/" + url
-            except IndexError:
+            except (AttributeError, TypeError):
                 continue
 
             picture = adv.find("img")

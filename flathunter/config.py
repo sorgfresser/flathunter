@@ -29,6 +29,19 @@ def _read_env(key: str, fallback: Optional[str] = None) -> Callable[[], Optional
     """ read the given key from environment"""
     return lambda: os.environ.get(key, fallback)
 
+def _to_bool(value: Any) -> bool:
+    """Cast config parameters to booleans"""
+    if isinstance(value, bool):
+        return value
+    value = str(value).strip().lower()
+    if value in ("true", "1", "on", "yes", "y"):
+        return True
+    if value in ("false", "0", "off", "no", "n"):
+        return False
+    error_msg = f"Cannot convert config parameter '{value}' to boolean"
+    logger.error(error_msg)
+    raise ValueError(error_msg)
+
 
 class Env:
     """Reads data from the environment"""

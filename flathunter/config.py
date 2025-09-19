@@ -1,6 +1,6 @@
 """Wrap configuration options as an object"""
 import os
-from typing import Optional, Dict, Any, List, Callable
+from typing import Optional, Dict, Any, List, Protocol
 
 import json
 import yaml
@@ -24,8 +24,12 @@ from flathunter.exceptions import ConfigException
 
 load_dotenv()
 
+class Readenv(Protocol):
+    """Type information for the read_env callback"""
+    @staticmethod
+    def __call__() -> Optional[str]: ...
 
-def _read_env(key: str, fallback: Optional[str] = None) -> Callable[[], Optional[str]]:
+def _read_env(key: str, fallback: Optional[str] = None) -> Readenv:
     """ read the given key from environment"""
     return lambda: os.environ.get(key, fallback)
 
@@ -41,7 +45,6 @@ def _to_bool(value: Any) -> bool:
     error_msg = f"Cannot convert config parameter '{value}' to boolean"
     logger.error(error_msg)
     raise ValueError(error_msg)
-
 
 class Env:
     """Reads data from the environment"""
@@ -98,7 +101,6 @@ class Env:
     FLATHUNTER_FILTER_MAX_ROOMS = _read_env("FLATHUNTER_FILTER_MAX_ROOMS")
     FLATHUNTER_FILTER_MAX_PRICE_PER_SQUARE = _read_env(
         "FLATHUNTER_FILTER_MAX_PRICE_PER_SQUARE")
-
 
 def elide(string):
     """Obfuscate the value of a string for debug purposes"""

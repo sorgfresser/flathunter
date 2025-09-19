@@ -196,6 +196,7 @@ class Crawler(ABC):
             driver.refresh()
             raise
 
+    # pylint: disable=too-many-locals
     @backoff.on_exception(wait_gen=backoff.constant,
                         exception=CaptchaUnsolvableError,
                         max_tries=3)

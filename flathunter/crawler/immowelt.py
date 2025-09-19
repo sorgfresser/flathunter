@@ -90,7 +90,7 @@ class Immowelt(Crawler):
                 url = id_element.get("href")
                 if "https" not in url:
                     url = "https://immowelt.de/" + url
-            except IndexError:
+            except (AttributeError, TypeError):
                 continue
 
             picture = adv.find("img")
@@ -102,7 +102,7 @@ class Immowelt(Crawler):
                 address = adv.find(
                     "div", attrs={"data-testid": "cardmfe-description-box-address"}
                   ).text
-            except (IndexError, AttributeError):
+            except AttributeError:
                 address = ""
             ad_id = url.split('/')[-1]
             processed_id = int(

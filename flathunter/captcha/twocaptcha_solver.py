@@ -47,6 +47,7 @@ class TwoCaptchaSolver(CaptchaSolver):
         captcha_id = self.__submit_2captcha_request(params)
         return RecaptchaResponse(self.__retrieve_2captcha_result(captcha_id))
 
+    # pylint: disable=too-many-arguments,too-many-positional-arguments
     def solve_awswaf(
         self,
         sitekey: str,

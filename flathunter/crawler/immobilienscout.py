@@ -11,7 +11,6 @@ from selenium.webdriver import Chrome
 from flathunter.abstract_crawler import Crawler
 from flathunter.logging import logger
 from flathunter.chrome_wrapper import get_chrome_driver
-from flathunter.captcha.twocaptcha_solver import TwoCaptchaSolver
 from flathunter.exceptions import DriverLoadException
 
 STATIC_URL_PATTERN = re.compile(r'https://www\.immobilienscout24\.de')

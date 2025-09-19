@@ -17,7 +17,7 @@ class SenderApprise(Processor, Notifier):
 
     def process_expose(self, expose):
         """Send a message to a user describing the expose"""
-        message = self.config.get('message', "").format(
+        message = (self.config.get('message') or '').format(
             crawler=expose.get('crawler', 'N/A'),
             title=expose.get('title', 'N/A'),
             rooms=expose.get('rooms', 'N/A'),
@@ -27,7 +27,7 @@ class SenderApprise(Processor, Notifier):
             address=expose.get('address', 'N/A'),
             durations=expose.get('durations', 'N/A')
         ).strip()
-        title = self.config.get('title', "").format(
+        title = (self.config.get('title') or '').format(
             crawler=expose.get('crawler', 'N/A'),
             title=expose.get('title', 'N/A'),
             rooms=expose.get('rooms', 'N/A'),

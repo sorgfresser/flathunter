@@ -39,6 +39,7 @@ class CaptchaSolver:
         """Should be implemented in subclass"""
         raise NotImplementedError()
 
+    # pylint: disable=too-many-arguments,too-many-positional-arguments
     def solve_awswaf(
         self,
         sitekey: str,

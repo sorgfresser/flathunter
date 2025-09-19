@@ -2,14 +2,17 @@
 # Enable verbose mode (print DEBUG log messages)
 # verbose: true
 
-# Should the bot endlessly looop through the URLs?
-# Between each loop it waits for <sleeping_time> seconds.
-# Note that Ebay will (temporarily) block your IP if you
-# poll too often - don't lower this below 600 seconds if you
-# are crawling Ebay.
+# Should the bot loop through the URLs endlessly?
+# Between each loop it waits for <sleeping_time> seconds plus
+# a random delay of up to ten percent to circumvent bot detection
+# systems. To have flathunter wait exactly <sleeping_time> seconds,
+# set random_jitter to False. Note that Ebay will (temporarily)
+# block your IP if you poll too often - don't lower <sleeping_time>
+# below 600 seconds if you are crawling Ebay.
 loop:
     active: yes
     sleeping_time: 600
+    random_jitter: True
 
 # Location of the Database to store already seen offerings
 # Defaults to the current directory

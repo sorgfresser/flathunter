@@ -29,6 +29,19 @@ def _read_env(key: str, fallback: Optional[str] = None) -> Callable[[], Optional
     """ read the given key from environment"""
     return lambda: os.environ.get(key, fallback)
 
+def _to_bool(value: Any) -> bool:
+    """Cast config parameters to booleans"""
+    if isinstance(value, bool):
+        return value
+    value = str(value).strip().lower()
+    if value in ("true", "1", "on", "yes", "y"):
+        return True
+    if value in ("false", "0", "off", "no", "n"):
+        return False
+    error_msg = f"Cannot convert config parameter '{value}' to boolean"
+    logger.error(error_msg)
+    raise ValueError(error_msg)
+
 
 class Env:
     """Reads data from the environment"""
@@ -48,6 +61,7 @@ class Env:
     FLATHUNTER_VERBOSE_LOG = _read_env("FLATHUNTER_VERBOSE_LOG")
     FLATHUNTER_LOOP_PERIOD_SECONDS = _read_env(
         "FLATHUNTER_LOOP_PERIOD_SECONDS")
+    FLATHUNTER_RANDOM_JITTER_ENABLED = _read_env("FLATHUNTER_RANDOM_JITTER_ENABLED")
     FLATHUNTER_LOOP_PAUSE_FROM = _read_env("FLATHUNTER_LOOP_PAUSE_FROM")
     FLATHUNTER_LOOP_PAUSE_TILL = _read_env("FLATHUNTER_LOOP_PAUSE_TILL")
     FLATHUNTER_MESSAGE_FORMAT = _read_env("FLATHUNTER_MESSAGE_FORMAT")
@@ -217,6 +231,10 @@ Preis: {price}
     def loop_period_seconds(self):
         """Number of seconds to wait between crawls when looping"""
         return self._read_yaml_path('loop.sleeping_time', 60 * 10)
+
+    def random_jitter_enabled(self):
+        """Whether a random delay should be added to loop sleeping time, defaults to true"""
+        return self._read_yaml_path('loop.random_jitter', True)
 
     def loop_pause_from(self):
         """Start time of loop pause"""
@@ -470,6 +488,12 @@ class Config(CaptchaEnvironmentConfig):  # pylint: disable=too-many-public-metho
         if env_seconds is not None:
             return int(env_seconds)
         return super().loop_period_seconds()
+
+    def random_jitter_enabled(self):
+        env_jitter = Env.FLATHUNTER_RANDOM_JITTER_ENABLED()
+        if env_jitter is not None:
+            return _to_bool(env_jitter)
+        return _to_bool(super().random_jitter_enabled())
 
     def loop_pause_from(self):
         env_pause = Env.FLATHUNTER_LOOP_PAUSE_FROM()
